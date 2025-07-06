@@ -26,12 +26,9 @@ export default function Home() {
       return;
     }
 
-    // Dopo signUp, salviamo i dati extra in tabella `users`
-    const user = data.user;
-
-    if (user) {
+    if (data.user) {
       await supabase.from('users').insert({
-        id: user.id,
+        id: data.user.id,
         email: form.email,
         name: form.name,
         role: form.role,
