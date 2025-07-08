@@ -74,7 +74,7 @@ export default function Home() {
               <h1 className="text-3xl font-bold text-gray-800">PlayRoster</h1>
             </div>
             <p className="text-gray-600 text-center mb-6 text-sm">
-              Crea e gestisci la tua rosa come un manager!
+              CREA E GESTISCI LA TUA ROSA!
             </p>
             <button
               onClick={() => setStep('login')}
