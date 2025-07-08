@@ -152,6 +152,7 @@ export default function Home() {
               className="mb-3 w-full border px-3 py-2 rounded bg-white"
               value={form.role}
               onChange={(e) => setForm({ ...form, role: e.target.value })}
+            >
               <option value="admin_lega">Admin di lega</option>
               <option value="allenatore">Allenatore</option>
             </select>
