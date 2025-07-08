@@ -152,13 +152,8 @@ export default function Home() {
               className="mb-3 w-full border px-3 py-2 rounded bg-white"
               value={form.role}
               onChange={(e) => setForm({ ...form, role: e.target.value })}
-            >
-           //   <option value="admin">Admin globale</option>
               <option value="admin_lega">Admin di lega</option>
-           //   <option value="presidente">Presidente</option>
-           //   <option value="ds">Direttore Sportivo</option>
               <option value="allenatore">Allenatore</option>
-           //  <option value="viceallenatore">Viceallenatore</option>
             </select>
             {error && <p className="text-red-600 text-sm mb-3">{error}</p>}
             <button
