@@ -74,8 +74,7 @@ export default function Home() {
               <h1 className="text-3xl font-bold text-gray-800">PlayRoster</h1>
             </div>
             <p className="text-gray-600 text-center mb-6 text-sm">
-              Gestisci il tuo fantacalcio come una vera squadra di Serie A.<br />
-              Ruoli realistici: Presidenti, DS, Allenatori, Viceallenatori.
+              Crea e gestisci la tua rosa come un manager!
             </p>
             <button
               onClick={() => setStep('login')}
