@@ -11,72 +11,78 @@ export default function Home() {
   const [leagueName, setLeagueName] = useState('');
   const [teamName, setTeamName] = useState('');
 
-  const handleRegister = async () => { /* ... tua logica invariata ... */ };
-  const handleLogin = async () => { /* ... tua logica invariata ... */ };
+  const handleRegister = async () => { /* stessa tua logica */ };
+  const handleLogin = async () => { /* stessa tua logica */ };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-100 to-gray-200 px-4 font-sans">
+      <div className="w-full max-w-md bg-white shadow-xl rounded-xl p-8 border border-gray-200">
+        {/* 👋 WELCOME */}
         {step === 'welcome' && (
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h1 className="text-2xl font-bold text-gray-800 mb-3">🎯 PlayRoster</h1>
-            <p className="text-gray-600 mb-6 text-sm">
-              Gestisci il tuo fantacalcio come una vera squadra di Serie A. Ruoli realistici: Presidenti, DS, Allenatori e Viceallenatori.
+          <>
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-3xl">🏟️</span>
+              <h1 className="text-2xl font-bold text-gray-800">PlayRoster</h1>
+            </div>
+            <p className="text-sm text-gray-600 mb-6">
+              Gestisci il tuo fantacalcio come una vera squadra di Serie A.<br />
+              Ruoli realistici: Presidenti, DS, Allenatori e Viceallenatori.
             </p>
             <button
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded mb-3"
               onClick={() => setStep('login')}
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 rounded mb-3"
             >
               Login
             </button>
             <button
-              className="w-full border border-gray-400 hover:bg-gray-50 py-2 rounded font-medium"
               onClick={() => setStep('register')}
+              className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 rounded"
             >
               Registrati
             </button>
-          </div>
+          </>
         )}
 
+        {/* 🔐 LOGIN */}
         {step === 'login' && (
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-4">Accesso</h2>
+          <>
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Accedi al tuo account</h2>
             <input
               type="email"
               placeholder="Email"
-              className="mb-3 w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+              className="mb-3 w-full border px-3 py-2 rounded"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
             <input
               type="password"
               placeholder="Password"
-              className="mb-3 w-full border px-3 py-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+              className="mb-3 w-full border px-3 py-2 rounded"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
             {error && <p className="text-red-600 text-sm mb-2">{error}</p>}
             <button
               onClick={handleLogin}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded font-semibold mb-3"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded mb-3"
               disabled={loading}
             >
               {loading ? 'Accesso...' : 'Accedi'}
             </button>
             <button
               onClick={() => setStep('welcome')}
-              className="w-full text-sm text-gray-500 hover:underline"
+              className="text-sm text-gray-500 hover:underline"
             >
-              ← Torna alla Home
+              ← Torna alla home
             </button>
-          </div>
+          </>
         )}
 
+        {/* 🧾 REGISTRAZIONE */}
         {step === 'register' && (
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-4">Registrazione</h2>
+          <>
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Registrazione</h2>
             <input
-              type="text"
               placeholder="Nome"
               className="mb-3 w-full border px-3 py-2 rounded"
               value={form.name}
@@ -111,18 +117,18 @@ export default function Home() {
             {error && <p className="text-red-600 text-sm mb-2">{error}</p>}
             <button
               onClick={handleRegister}
-              className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded font-semibold mb-3"
+              className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded mb-3"
               disabled={loading}
             >
               {loading ? 'Registrazione...' : 'Registrati'}
             </button>
             <button
               onClick={() => setStep('welcome')}
-              className="w-full text-sm text-gray-500 hover:underline"
+              className="text-sm text-gray-500 hover:underline"
             >
-              ← Torna alla Home
+              ← Torna alla home
             </button>
-          </div>
+          </>
         )}
       </div>
     </div>
