@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 
 export default function Home() {
-  const [step, setStep] = useState<'welcome' | 'login' | 'register'>('welcome');
+  const [step, setStep] = useState('welcome');
   const [form, setForm] = useState({ email: '', password: '', name: '', role: 'allenatore' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
