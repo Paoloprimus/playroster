@@ -1,41 +1,48 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
 
 export default function AuthCallbackPage() {
   const router = useRouter()
+  const [status, setStatus] = useState<'loading' | 'verified' | 'error'>('loading')
 
   useEffect(() => {
-    const handleVerification = async () => {
-      const { data: sessionData, error } = await supabase.auth.getUser()
+    const checkUser = async () => {
+      const { data: userResponse, error } = await supabase.auth.getUser()
 
-      if (error || !sessionData?.user) {
-        console.error('Errore nel recupero utente:', error)
+      if (error || !userResponse?.user) {
+        setStatus('error')
         return
       }
 
-      const user = sessionData.user
-      const isVerified = !!user.email_confirmed_at
+      const user = userResponse.user
 
-      if (isVerified) {
-        // Aggiorna la tabella `users` con verified = true
+      if (user.email_confirmed_at) {
+        // Aggiorna la tabella users con verified = true
         await supabase.from('users')
           .update({ verified: true })
           .eq('id', user.id)
-      }
 
-      // Reindirizza alla dashboard
-      router.push('/dashboard')
+        setStatus('verified')
+        // Redirige dopo qualche secondo
+        setTimeout(() => {
+          router.push('/dashboard')
+        }, 1500)
+      } else {
+        setStatus('error')
+      }
     }
 
-    handleVerification()
+    checkUser()
   }, [])
 
   return (
-    <div className="min-h-screen flex items-center justify-center text-center p-4">
-      <p>Verifica dell’account in corso... Attendi qualche secondo.</p>
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 text-center">
+      {status === 'loading' && <p>Verifica in corso...</p>}
+      {status === 'verified' && <p>Email verificata ✔️ Reindirizzamento...</p>}
+      {status === 'error' && <p>Errore durante la verifica. Riprova o contatta supporto.</p>}
     </div>
   )
 }
