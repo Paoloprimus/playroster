@@ -54,14 +54,33 @@ export default function Home() {
       return;
     }
 
-    if (!data.user?.email_confirmed_at) {
+    const user = data.user;
+
+    if (!user?.email_confirmed_at) {
       setError('Devi confermare l’email prima di accedere.');
       setLoading(false);
       return;
     }
 
-    setLoading(false);
-    window.location.href = '/dashboard'; // redirect esterno
+    // Aggiorna verified = true nella tabella users
+    await supabase.from('users')
+      .update({ verified: true })
+      .eq('id', user.id);
+
+    // Legge il ruolo dell’utente per reindirizzare alla dashboard giusta
+    const { data: userRow } = await supabase
+      .from('users')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+
+    const role = userRow?.role || 'allenatore';
+
+    if (role === 'admin_lega') {
+      window.location.href = '/dashboard-admin';
+    } else {
+      window.location.href = '/dashboard';
+    }
   };
 
   return (
