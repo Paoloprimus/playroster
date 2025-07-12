@@ -23,9 +23,5 @@
     "typescript": "^5.0.4",
     "@types/react": "^18.2.0",
     "@types/node": "^20.4.0"
-  },
-  "overrides": {
-    "ws/bufferutil": false,
-    "ws/utf-8-validate": false
   }
 }
