@@ -63,9 +63,16 @@ export default function Home() {
     }
 
     // Aggiorna verified = true nella tabella users
-    await supabase.from('users')
+    const { error: updateError } = await supabase.from('users')
       .update({ verified: true })
-      .eq('id', user.id);
+      .eq('id', user.id)
+    
+    if (updateError) {
+      console.error('Errore aggiornamento verified:', updateError.message)
+    } else {
+      console.log('✅ Campo verified aggiornato con successo')
+    }
+
 
     // Legge il ruolo dell’utente per reindirizzare alla dashboard giusta
     const { data: userRow } = await supabase
