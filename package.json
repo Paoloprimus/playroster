@@ -22,4 +22,10 @@
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.24"
   }
+  "scripts": {
+  "build": "npm install ws --no-optional && next build"
+  }
 }
+
+
+
