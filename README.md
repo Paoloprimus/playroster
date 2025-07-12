@@ -1,4 +1,4 @@
-<!-- trigger rebuild -->
+<!-- trigger re-rebuild -->
 
 # 🏟️ PlayRoster
 
